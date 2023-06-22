@@ -88,14 +88,14 @@ const Header = () => {
         dispatch(clearProfile, clearUser)
     }
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark ">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top ">
             <NavLink className="navbar-brand p-2" to="/">
                 <img src='./images/logo.png' alt='logo' width={70}></img>
             </NavLink>
             <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse justify-content-between px-3" id="collapsibleNavId">
+            <div className="collapse navbar-collapse justify-content-between px-2" id="collapsibleNavId">
                 <div className="left-menu">
                     <ul className="navbar-nav me-auto mt-2 mt-lg-0">
                         <li className="nav-item">

@@ -69,8 +69,8 @@ export const HomeBanner = () => {
                                         {item.description}
                                     </p>
 
-                                    <NavLink className='btn btn-dark' to={`/productdetail/${item.id}`}>
-                                        <Button size='large' danger type='primary' View detail>Add to Bag</Button>
+                                    <NavLink to={`/productdetail/${item.id}`}>
+                                        <Button size='large' danger type='primary' >Add to Bag</Button>
                                     </NavLink>
 
                                 </div>

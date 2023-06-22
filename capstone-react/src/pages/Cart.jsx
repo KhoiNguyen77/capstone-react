@@ -90,14 +90,14 @@ export const Cart = () => {
                                                     <input id="form1" value={item.quantity} type="number" className="form-control" />
                                                 </div>
 
-                                                <button className="btn btn-primary px-3 me-2" onClick={() => {
+                                                <button className="btn btn-primary mx-2 px-3 me-2" onClick={() => {
                                                     const payload = {
                                                         id: item.id,
                                                         quantity: 1
                                                     }
                                                     const action = changeQuantityAction(payload);
                                                     dispatch(action);
-                                                }}><i className="fa fa-minus" />
+                                                }}><i className="fa fa-plus" />
                                                 </button>
 
                                             </div>

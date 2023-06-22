@@ -28,7 +28,9 @@ const ProductDetail = () => {
 
         }
     }
-
+    // const handleChangeSize = (e) => {
+    //     setProductDetail(e.target.size);
+    // };
 
     console.log(params.id);
     useEffect(() => {
@@ -54,9 +56,11 @@ const ProductDetail = () => {
                     <h3>Quantity: {productDetail.quantity}</h3>
                     <h3>Price: {productDetail.price} $</h3>
                     <Space wrap className='mt-3'>
+
                         <select class="form-select" aria-label="Default select example"  >
+                            <option selected>Choose your size</option>
                             {productDetail.size?.map((item) => {
-                                return <option value={item.size}>{item}</option>
+                                return <option value={item}>{item}</option>
                             })}
                         </select>
                     </Space>

@@ -3,7 +3,7 @@ import { http } from '../../util/config';
 
 const initialState = {
     cart: [
-        { id: '1', name: 'nike', price: 1000, quantity: 1, image: 'https://shop.cyberlearn.vn/images/adidas-prophere.png' }
+
     ]
 }
 
@@ -37,7 +37,7 @@ const productReducer = createSlice({
             if (item) {
                 item.quantity += itemquantity.quantity;
                 if (item.quantity < 1) {
-                    if (window.confirm('bạn có muốn xóa sản phẩm này không>')) {
+                    if (window.confirm('Do you want to delete this item ?')) {
                         state.cart = state.cart.filter(sp => sp.id !== itemquantity.id);
                     } else {
                         item.quantity -= itemquantity.quantity;
@@ -57,11 +57,17 @@ export default productReducer.reducer
 
 export const getAllProductApi = () => {
     return async (dispatch) => {
-        let res = await http.get('/api/product');
+        let res = await http.get('/api/Product');
         const actionProduct = getAllProductAction(res.data.content);//fulfill
         dispatch(actionProduct);
 
     }
 
 }
+// export const getProductDetailApi = ()=>{
+//     return async (dispatch) => {
+//         let res = await http.get(`/api/product/getbyid?id=${params.id}`);
+//         const actionProduct = getAllProductAction(res.data.content);//fulfill
+//         dispatch(actionProduct);
+// }
 

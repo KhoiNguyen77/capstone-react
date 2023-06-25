@@ -2,17 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { http } from '../util/config';
 import { ShoppingCartOutlined, HeartFilled } from '@ant-design/icons';
-import { Avatar, Button, Card, Col, Row, Space, message } from 'antd';
+import { Button, Card, Col, Form, Row, Space, message } from 'antd';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCartAction } from '../Redux/Reducer/productReducer';
+import { useFormik } from 'formik';
+import * as yup from 'yup'
 const { Meta } = Card;
 const ProductDetail = () => {
-
     const [productDetail, setProductDetail] = useState({})
     const params = useParams();
     const dispatch = useDispatch();
     const [messageApi, contextHolder] = message.useMessage();
+    const selectmik = useFormik({
+        initialValues: {
+            size: '',
+        },
+
+        onSubmit: (value) => {
+
+        },
+        validationSchema: yup.object().shape({
+            size: yup.string().required("Please choose your size")
+        })
+    })
     const success = () => {
         messageApi.open({
             type: 'success',
@@ -28,21 +41,26 @@ const ProductDetail = () => {
 
         }
     }
-    // const handleChangeSize = (e) => {
-    //     setProductDetail(e.target.size);
-    // };
+    const handleChangeSize = (e) => {
+        console.log(e.target.value)
+        setProductDetail({
+            ...productDetail,
+            selectedSize: e.target.value
+        })
+    };
 
-    console.log(params.id);
+
     useEffect(() => {
         //Call api
         getProductDetail();
+
 
     }, [params.id])
 
 
     return (
 
-        <div className='container mt-3'>
+        <div className='container mt-4'>
             {contextHolder}
             <Row gutter={[20, 20]} >
                 <Col lg={8}>
@@ -57,19 +75,18 @@ const ProductDetail = () => {
                     <h3>Price: {productDetail.price} $</h3>
                     <Space wrap className='mt-3'>
 
-                        <select class="form-select" aria-label="Default select example"  >
-                            <option selected>Choose your size</option>
+                        <select class="form-select" aria-label="Default select example" onChange={handleChangeSize} >
+                            <option selected value='1' >Choose your size</option>
                             {productDetail.size?.map((item) => {
-                                return <option value={item}>{item}</option>
+                                return <option value={item.selectedSize}>{item}</option>
                             })}
-                        </select>
+                        </select> <span className='text-danger'>{selectmik.errors.size}</span>
                     </Space>
                     <Button size='large' className='mt-4 d-block ' onClick={() => {
-
                         const action = addCartAction(productDetail);
                         dispatch(action);
-                        success(action);
                         console.log(action)
+                        success(action);
                     }} > <ShoppingCartOutlined /> <a>Add to carts</a> </Button>
                 </Col>
             </Row>

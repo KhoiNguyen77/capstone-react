@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, SearchOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { Dropdown } from 'antd';
 import { USER_LOGIN } from '../util/config';
 import { getProfileAction, logInAction } from '../Redux/Reducer/userReducer';
@@ -38,11 +38,17 @@ const Header = () => {
                 case "/": {
                     return <NavLink className="nav-link" to="/">Home</NavLink>
                 }
+                case "/search": {
+                    return <NavLink className="nav-link" to="/search"><SearchOutlined style={{
+                        fontSize: '30px', paddingRight: '7px'
+                    }} /></NavLink>
+                }
                 case "/cart": {
                     return <NavLink className="nav-link" to="/cart" > <ShoppingCartOutlined style={{
-                        fontSize: '35px', paddingRight: '10px'
+                        fontSize: '30px', paddingRight: '7px'
                     }} /><span className='cart-plus'>{cart.length}</span> </NavLink>
                 }
+
                 case "/register": {
                     return <NavLink className="nav-link" to="/register">Register</NavLink>
                 }
@@ -88,8 +94,8 @@ const Header = () => {
         dispatch(clearProfile, clearUser)
     }
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top ">
-            <NavLink className="navbar-brand p-2" to="/">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark  ">
+            <NavLink className="navbar-brand px-2" to="/">
                 <img src='./images/logo.png' alt='logo' width={70}></img>
             </NavLink>
             <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +117,7 @@ const Header = () => {
 
                 </div>
                 <div className="right-menu">
-                    <ul className="navbar-nav me-auto mt-2 mt-lg-0">
+                    <ul className="navbar-nav  mt-lg-0">
                         <li className="nav-item">
                             <Dropdown menu={{ items }} >
                                 <a onClick={(e) => e.preventDefault()}>
@@ -119,11 +125,15 @@ const Header = () => {
                                 </a>
                             </Dropdown>
                         </li>
+                        <li className="nav-item">
+                            {getLink("/search")}
 
+                        </li>
                         <li className="nav-item">
                             {getLink("/cart")}
 
                         </li>
+
 
                     </ul>
                 </div>

@@ -7,10 +7,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './HomeBanner.css'
-import { Parallax, Pagination, Navigation } from "swiper";
+import { Parallax, Pagination, Navigation, Autoplay } from "swiper";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProductApi } from '../../Redux/Reducer/productReducer';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+
 
 
 
@@ -18,10 +19,13 @@ import { NavLink } from 'react-router-dom';
 export const HomeBanner = () => {
     const { arrProduct } = useSelector(state => state.productReducer);
     const dispatch = useDispatch();
+    const params = useParams();
     const getProductBannerApi = async () => {
         const actionAsync = getAllProductApi();
         dispatch(actionAsync);
     }
+
+
     useEffect(() => {
         getProductBannerApi();
         console.log('arrProduct', arrProduct);
@@ -36,27 +40,24 @@ export const HomeBanner = () => {
                     "--swiper-pagination-color": "#fff",
                 }}
                 speed={600}
-                parallax={true}
+
                 pagination={{
                     dynamicBullets: true,
                 }}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
 
                 navigation={true}
-                modules={[Parallax, Pagination, Navigation]}
+                modules={[Pagination, Navigation, Autoplay]}
                 className="mySwiper"
             >
-                <div
-                    slot="container-start"
-                    className="parallax-bg"
-                    style={{
-                        "background-image":
-                            "url(/images/background.webp)",
-                    }}
-                    data-swiper-parallax="-23%"
-                ></div>
+
+
                 {arrProduct?.map((item) => {
                     return <SwiperSlide key={item.id}>
-                        <Row >
+                        {/* <Row >
                             <Col lg={12} md={24} sm={24} xs={24} className='mt-5'>
                                 <div className="title" data-swiper-parallax="-300">
                                     {item.name}
@@ -81,8 +82,25 @@ export const HomeBanner = () => {
                                     <img src={item.image} alt={item.name} />
                                 </div>
                             </Col>
-                        </Row>
+                        </Row> */}
+                        <div className="home-banner-container">
+                            <div>
+                                <p className="brandname">{item.name}</p>
+                                <h3>Summer Sale</h3>
+                                <h1> Products</h1>
+                                <img src={item.image} alt="shoes" className="home-banner-image" />
 
+                                <div>
+                                    <NavLink to={`/productdetail/${item.id}`}>
+                                        <button type="button">More Detail</button>
+                                    </NavLink>
+                                    <div className="desc">
+                                        <h5>Description</h5>
+                                        <p>{item.shortDescription}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </SwiperSlide>
 

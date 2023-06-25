@@ -1,0 +1,15 @@
+.product-image {
+
+    width: 100%;
+    transform: translate(0, -1.5rem);
+    transition: transform 500ms ease-in-out;
+    filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, 0.4));
+}
+
+.carditem:hover .product-image {
+    transform: translate(-1.5rem, -7rem) rotate(-20deg);
+}
+
+.carditem .moredetail {
+    text-decoration: none;
+}

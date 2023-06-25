@@ -14,6 +14,8 @@ import Order from './pages/Order';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
+import SearchProduct from './pages/SearchProduct';
+
 export const customNavigate = createBrowserHistory();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,9 +25,9 @@ root.render(
         <Route path='' element={<HomeTemplate></HomeTemplate>}>
           <Route index element={<Home></Home>}></Route>
           <Route path='/productdetail' element={<ProductDetail></ProductDetail>}>
-
             <Route path=':id' element={<ProductDetail />}></Route>
           </Route>
+          <Route path='/search' element={<SearchProduct></SearchProduct>}></Route>
           <Route path='/cart' element={<Cart></Cart>}></Route>
           <Route path='/register' element={<Register></Register>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>

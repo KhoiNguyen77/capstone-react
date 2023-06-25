@@ -24,8 +24,7 @@ export const Cart = () => {
 
     useEffect(() => {
         getProductApi();
-        tinhTong();
-        tongSL();
+
     }, [])
     return (
         <section>
@@ -55,7 +54,7 @@ export const Cart = () => {
                                             {/* Data */}
                                             <p><strong>{item.name}</strong></p>
 
-                                            <p>Size: {item.size}</p>
+                                            <p>Size: {item.selectedSize}</p>
 
                                             <button type="button" className="btn btn-primary btn-sm me-1 mb-2" title="Remove item" onClick={
                                                 () => {
